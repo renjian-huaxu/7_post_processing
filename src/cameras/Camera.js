@@ -9,17 +9,16 @@ export default class Camera {
 		this.aspect = aspect;
 		this.near = near;
 		this.far = far;
-	
+		
 		this.position = new Vector3();
 		this.target = { position: new Vector3() };
-	
-		this.autoUpdateMatrix = true;
+		this.up = new Vector3( 0, 1, 0 );
 	
 		this.projectionMatrix = null;
 		this.matrix = new Matrix4();
 	
-		this.up = new Vector3( 0, 1, 0 );
-	
+		this.autoUpdateMatrix = true;
+
 		this.tmpVec = new Vector3();
 
 		this.updateProjectionMatrix();

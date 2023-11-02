@@ -9,6 +9,7 @@ export default class Color {
     }
 
     setRGB(r, g, b) {
+
         this.r = r;
 		this.g = g;
 		this.b = b;
@@ -22,6 +23,7 @@ export default class Color {
     }
 
     setHSV(h, s, v) {
+
 		var red, green, blue, i, f, p, q, t;
 		
 		if ( v == 0.0 ) {
@@ -63,6 +65,7 @@ export default class Color {
     }
 
     setHex(hex) {
+
         this.hex = ( ~~ hex ) & 0xffffff
 
         if ( this.autoUpdate ) {
@@ -74,24 +77,34 @@ export default class Color {
     }
 
     updateHex() {
+
         this.hex = ~~( this.r * 255 ) << 16 ^ ~~( this.g * 255 ) << 8 ^ ~~( this.b * 255 )
+
     }
 
     updateRGBA() {
+
         this.r = ( this.hex >> 16 & 255 ) / 255;
 		this.g = ( this.hex >> 8 & 255 ) / 255;
 		this.b = ( this.hex & 255 ) / 255;
+
     }
 
     updateStyleString() {
+
         this.__styleString = 'rgb(' + ~~( this.r * 255 ) + ',' + ~~( this.g * 255 ) + ',' + ~~( this.b * 255 ) + ')'
+
     }
 
     clone() {
+
         return new Color( this.hex )
+
     }
 
     toString() {
+
         return 'THREE.Color ( r: ' + this.r + ', g: ' + this.g + ', b: ' + this.b + ', hex: ' + this.hex + ' )'
+		
     }
 }

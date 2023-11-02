@@ -3,6 +3,7 @@ import Vector3 from "./Vector3";
 export default class Face3 {
 
     constructor(a, b, c, normal, materials) {
+
         this.a = a;
         this.b = b;
         this.c = c;
@@ -16,6 +17,8 @@ export default class Face3 {
     }
 
     toString() {
+
         return 'MTHREE.Face3 ( ' + this.a + ', ' + this.b + ', ' + this.c + ' )';
+        
     }
 }

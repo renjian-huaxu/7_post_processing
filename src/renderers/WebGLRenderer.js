@@ -7,7 +7,11 @@ import AmbientLight from "../lights/AmbientLight";
 import DirectionalLight from "../lights/DirectionalLight";
 import PointLight from "../lights/PointLight";
 import LineBasicMaterial from "../materials/LineBasicMaterial";
-import { AdditiveBlending, BillboardBlending, NormalBlending, SmoothShading, SubtractiveBlending } from "../materials/Material";
+import { 
+    AdditiveBlending, BillboardBlending, 
+    NormalBlending, SmoothShading, 
+    SubtractiveBlending 
+} from "../materials/Material";
 import MeshBasicMaterial from "../materials/MeshBasicMaterial";
 import MeshDepthMaterial from "../materials/MeshDepthMaterial";
 import MeshFaceMaterial from "../materials/MeshFaceMaterial";
@@ -17,7 +21,21 @@ import MeshPhongMaterial from "../materials/MeshPhongMaterial";
 import ParticleBasicMaterial from "../materials/ParticleBasicMaterial";
 import Uniforms from "../materials/Uniforms";
 import CubeRefractionMapping from "../materials/mappings/CubeRefractionMapping";
-import { AlphaFormat, ByteType, ClampToEdgeWrapping, FloatType, IntType, LinearFilter, LinearMipMapLinearFilter, LinearMipMapNearestFilter, LuminanceAlphaFormat, LuminanceFormat, MirroredRepeatWrapping, MixOperation, NearestFilter, NearestMipMapLinearFilter, NearestMipMapNearestFilter, RGBAFormat, RGBFormat, RepeatWrapping, ShortType, UnsignedByteType, UnsignedShortType } from "../materials/textures/Texture";
+import { 
+    AlphaFormat, ByteType, 
+    ClampToEdgeWrapping, 
+    FloatType, IntType, 
+    LinearFilter, 
+    LinearMipMapLinearFilter, 
+    LinearMipMapNearestFilter, 
+    LuminanceAlphaFormat,
+    LuminanceFormat, MirroredRepeatWrapping, 
+    MixOperation, NearestFilter, 
+    NearestMipMapLinearFilter, 
+    NearestMipMapNearestFilter, RGBAFormat, 
+    RGBFormat, RepeatWrapping, ShortType, 
+    UnsignedByteType, UnsignedShortType 
+} from "../materials/textures/Texture";
 import Line, { LineStrip } from "../objects/Line";
 import Mesh from "../objects/Mesh";
 import ParticleSystem from "../objects/ParticleSystem";
@@ -90,8 +108,8 @@ export default class WebGLRenderer {
 
         }
 
-        _gl.clearColor(0, 0, 0, 1);
-        _gl.clearDepth(1);
+        // _gl.clearColor(0, 0, 0, 1);
+        // _gl.clearDepth(1);
 
         _gl.enable(_gl.DEPTH_TEST);
         _gl.depthFunc(_gl.LEQUAL);
@@ -2103,14 +2121,14 @@ var Snippets = {
 
         "#ifdef USE_FOG",
 
-        "uniform vec3 fogColor;",
+            "uniform vec3 fogColor;",
 
-        "#ifdef FOG_EXP2",
-        "uniform float fogDensity;",
-        "#else",
-        "uniform float fogNear;",
-        "uniform float fogFar;",
-        "#endif",
+            "#ifdef FOG_EXP2",
+                "uniform float fogDensity;",
+            "#else",
+                "uniform float fogNear;",
+                "uniform float fogFar;",
+            "#endif",
 
         "#endif"
 
@@ -2120,17 +2138,17 @@ var Snippets = {
 
         "#ifdef USE_FOG",
 
-        "float depth = gl_FragCoord.z / gl_FragCoord.w;",
+            "float depth = gl_FragCoord.z / gl_FragCoord.w;",
 
-        "#ifdef FOG_EXP2",
-        "const float LOG2 = 1.442695;",
-        "float fogFactor = exp2( - fogDensity * fogDensity * depth * depth * LOG2 );",
-        "fogFactor = 1.0 - clamp( fogFactor, 0.0, 1.0 );",
-        "#else",
-        "float fogFactor = smoothstep( fogNear, fogFar, depth );",
-        "#endif",
+            "#ifdef FOG_EXP2",
+                "const float LOG2 = 1.442695;",
+                "float fogFactor = exp2( - fogDensity * fogDensity * depth * depth * LOG2 );",
+                "fogFactor = 1.0 - clamp( fogFactor, 0.0, 1.0 );",
+            "#else",
+                "float fogFactor = smoothstep( fogNear, fogFar, depth );",
+            "#endif",
 
-        "gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );",
+            "gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );",
 
         "#endif"
 
@@ -2155,17 +2173,17 @@ var Snippets = {
 
         "#ifdef USE_ENVMAP",
 
-        "cubeColor = textureCube( env_map, vec3( -vReflect.x, vReflect.yz ) );",
+            "cubeColor = textureCube( env_map, vec3( -vReflect.x, vReflect.yz ) );",
 
-        "if ( combine == 1 ) {",
+            "if ( combine == 1 ) {",
 
-        "gl_FragColor = mix( gl_FragColor, cubeColor, reflectivity );",
+            "   gl_FragColor = mix( gl_FragColor, cubeColor, reflectivity );",
 
-        "} else {",
+            "} else {",
 
-        "gl_FragColor = gl_FragColor * cubeColor;",
+            "   gl_FragColor = gl_FragColor * cubeColor;",
 
-        "}",
+            "}",
 
         "#endif"
 
@@ -2187,18 +2205,18 @@ var Snippets = {
 
         "#ifdef USE_ENVMAP",
 
-        "vec4 mPosition = objectMatrix * vec4( position, 1.0 );",
-        "vec3 nWorld = mat3( objectMatrix[0].xyz, objectMatrix[1].xyz, objectMatrix[2].xyz ) * normal;",
+            "vec4 mPosition = objectMatrix * vec4( position, 1.0 );",
+            "vec3 nWorld = mat3( objectMatrix[0].xyz, objectMatrix[1].xyz, objectMatrix[2].xyz ) * normal;",
 
-        "if ( useRefract ) {",
+            "if ( useRefract ) {",
 
-        "vReflect = refract( normalize( mPosition.xyz - cameraPosition ), normalize( nWorld.xyz ), refraction_ratio );",
+            "   vReflect = refract( normalize( mPosition.xyz - cameraPosition ), normalize( nWorld.xyz ), refraction_ratio );",
 
-        "} else {",
+            "} else {",
 
-        "vReflect = reflect( normalize( mPosition.xyz - cameraPosition ), normalize( nWorld.xyz ) );",
+            "   vReflect = reflect( normalize( mPosition.xyz - cameraPosition ), normalize( nWorld.xyz ) );",
 
-        "}",
+            "}",
 
         "#endif"
 
@@ -2320,19 +2338,19 @@ var Snippets = {
 
         "#if MAX_DIR_LIGHTS > 0",
 
-        "uniform vec3 directionalLightColor[ MAX_DIR_LIGHTS ];",
-        "uniform vec3 directionalLightDirection[ MAX_DIR_LIGHTS ];",
+            "uniform vec3 directionalLightColor[ MAX_DIR_LIGHTS ];",
+            "uniform vec3 directionalLightDirection[ MAX_DIR_LIGHTS ];",
 
         "#endif",
 
         "#if MAX_POINT_LIGHTS > 0",
 
-        "uniform vec3 pointLightColor[ MAX_POINT_LIGHTS ];",
-        "uniform vec3 pointLightPosition[ MAX_POINT_LIGHTS ];",
+            "uniform vec3 pointLightColor[ MAX_POINT_LIGHTS ];",
+            "uniform vec3 pointLightPosition[ MAX_POINT_LIGHTS ];",
 
-        "#ifdef PHONG",
-        "varying vec3 vPointLightVector[ MAX_POINT_LIGHTS ];",
-        "#endif",
+            "#ifdef PHONG",
+                "varying vec3 vPointLightVector[ MAX_POINT_LIGHTS ];",
+            "#endif",
 
         "#endif"
 
@@ -2344,40 +2362,40 @@ var Snippets = {
 
         "if ( !enableLighting ) {",
 
-        "vLightWeighting = vec3( 1.0 );",
+        "   vLightWeighting = vec3( 1.0 );",
 
         "} else {",
 
-        "vLightWeighting = ambientLightColor;",
+        "   vLightWeighting = ambientLightColor;",
 
-        "#if MAX_DIR_LIGHTS > 0",
+        "   #if MAX_DIR_LIGHTS > 0",
 
-        "for( int i = 0; i < MAX_DIR_LIGHTS; i++ ) {",
+        "   for( int i = 0; i < MAX_DIR_LIGHTS; i++ ) {",
 
-        "vec4 lDirection = viewMatrix * vec4( directionalLightDirection[ i ], 0.0 );",
-        "float directionalLightWeighting = max( dot( transformedNormal, normalize( lDirection.xyz ) ), 0.0 );",
-        "vLightWeighting += directionalLightColor[ i ] * directionalLightWeighting;",
+        "       vec4 lDirection = viewMatrix * vec4( directionalLightDirection[ i ], 0.0 );",
+        "       float directionalLightWeighting = max( dot( transformedNormal, normalize( lDirection.xyz ) ), 0.0 );",
+        "       vLightWeighting += directionalLightColor[ i ] * directionalLightWeighting;",
 
-        "}",
+        "   }",
 
-        "#endif",
+        "   #endif",
 
-        "#if MAX_POINT_LIGHTS > 0",
+        "   #if MAX_POINT_LIGHTS > 0",
 
-        "for( int i = 0; i < MAX_POINT_LIGHTS; i++ ) {",
+        "   for( int i = 0; i < MAX_POINT_LIGHTS; i++ ) {",
 
-        "vec4 lPosition = viewMatrix * vec4( pointLightPosition[ i ], 1.0 );",
-        "vec3 pointLightVector = normalize( lPosition.xyz - mvPosition.xyz );",
-        "float pointLightWeighting = max( dot( transformedNormal, pointLightVector ), 0.0 );",
-        "vLightWeighting += pointLightColor[ i ] * pointLightWeighting;",
+        "       vec4 lPosition = viewMatrix * vec4( pointLightPosition[ i ], 1.0 );",
+        "       vec3 pointLightVector = normalize( lPosition.xyz - mvPosition.xyz );",
+        "       float pointLightWeighting = max( dot( transformedNormal, pointLightVector ), 0.0 );",
+        "       vLightWeighting += pointLightColor[ i ] * pointLightWeighting;",
 
-        "#ifdef PHONG",
-        "vPointLightVector[ i ] = pointLightVector;",
-        "#endif",
+        "       #ifdef PHONG",
+        "       vPointLightVector[ i ] = pointLightVector;",
+        "       #endif",
 
-        "}",
+        "   }",
 
-        "#endif",
+        "   #endif",
 
         "}"
 
@@ -2405,6 +2423,7 @@ var Snippets = {
 
         "vec4 mSpecular = vec4( specular, opacity );",
 
+
         "#if MAX_POINT_LIGHTS > 0",
 
         "vec4 pointDiffuse  = vec4( 0.0 );",
@@ -2412,22 +2431,23 @@ var Snippets = {
 
         "for( int i = 0; i < MAX_POINT_LIGHTS; i++ ) {",
 
-        "vec3 pointVector = normalize( vPointLightVector[ i ] );",
-        "vec3 pointHalfVector = normalize( vPointLightVector[ i ] + vViewPosition );",
+            "vec3 pointVector = normalize( vPointLightVector[ i ] );",
+            "vec3 pointHalfVector = normalize( vPointLightVector[ i ] + vViewPosition );",
 
-        "float pointDotNormalHalf = dot( normal, pointHalfVector );",
-        "float pointDiffuseWeight = max( dot( normal, pointVector ), 0.0 );",
+            "float pointDotNormalHalf = dot( normal, pointHalfVector );",
+            "float pointDiffuseWeight = max( dot( normal, pointVector ), 0.0 );",
 
-        "float pointSpecularWeight = 0.0;",
-        "if ( pointDotNormalHalf >= 0.0 )",
-        "pointSpecularWeight = pow( pointDotNormalHalf, shininess );",
+            "float pointSpecularWeight = 0.0;",
+            "if ( pointDotNormalHalf >= 0.0 )",
+            "   pointSpecularWeight = pow( pointDotNormalHalf, shininess );",
 
-        "pointDiffuse  += mColor * pointDiffuseWeight;",
-        "pointSpecular += mSpecular * pointSpecularWeight;",
+            "pointDiffuse  += mColor * pointDiffuseWeight;",
+            "pointSpecular += mSpecular * pointSpecularWeight;",
 
         "}",
 
         "#endif",
+
 
         "#if MAX_DIR_LIGHTS > 0",
 
@@ -2436,21 +2456,21 @@ var Snippets = {
 
         "for( int i = 0; i < MAX_DIR_LIGHTS; i++ ) {",
 
-        "vec4 lDirection = viewMatrix * vec4( directionalLightDirection[ i ], 0.0 );",
+            "vec4 lDirection = viewMatrix * vec4( directionalLightDirection[ i ], 0.0 );",
 
-        "vec3 dirVector = normalize( lDirection.xyz );",
-        "vec3 dirHalfVector = normalize( lDirection.xyz + vViewPosition );",
+            "vec3 dirVector = normalize( lDirection.xyz );",
+            "vec3 dirHalfVector = normalize( lDirection.xyz + vViewPosition );",
 
-        "float dirDotNormalHalf = dot( normal, dirHalfVector );",
+            "float dirDotNormalHalf = dot( normal, dirHalfVector );",
 
-        "float dirDiffuseWeight = max( dot( normal, dirVector ), 0.0 );",
+            "float dirDiffuseWeight = max( dot( normal, dirVector ), 0.0 );",
 
-        "float dirSpecularWeight = 0.0;",
-        "if ( dirDotNormalHalf >= 0.0 )",
-        "dirSpecularWeight = pow( dirDotNormalHalf, shininess );",
+            "float dirSpecularWeight = 0.0;",
+            "if ( dirDotNormalHalf >= 0.0 )",
+            "dirSpecularWeight = pow( dirDotNormalHalf, shininess );",
 
-        "dirDiffuse  += mColor * dirDiffuseWeight;",
-        "dirSpecular += mSpecular * dirSpecularWeight;",
+            "dirDiffuse  += mColor * dirDiffuseWeight;",
+            "dirSpecular += mSpecular * dirSpecularWeight;",
 
         "}",
 
@@ -2581,9 +2601,9 @@ var ShaderLib = {
 
             "void main() {",
 
-            "float depth = gl_FragCoord.z / gl_FragCoord.w;",
-            "float color = 1.0 - smoothstep( mNear, mFar, depth );",
-            "gl_FragColor = vec4( vec3( color ), 1.0 );",
+                "float depth = gl_FragCoord.z / gl_FragCoord.w;",
+                "float color = 1.0 - smoothstep( mNear, mFar, depth );",
+                "gl_FragColor = vec4( vec3( color ), 1.0 );",
 
             "}"
 
@@ -2593,7 +2613,7 @@ var ShaderLib = {
 
             "void main() {",
 
-            "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+                "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
 
             "}"
 
@@ -2611,7 +2631,7 @@ var ShaderLib = {
 
             "void main() {",
 
-            "gl_FragColor = vec4( 0.5 * normalize( vNormal ) + 0.5, 1.0 );",
+                "gl_FragColor = vec4( 0.5 * normalize( vNormal ) + 0.5, 1.0 );",
 
             "}"
 
@@ -2623,10 +2643,10 @@ var ShaderLib = {
 
             "void main() {",
 
-            "vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
-            "vNormal = normalize( normalMatrix * normal );",
+                "vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
+                "vNormal = normalize( normalMatrix * normal );",
 
-            "gl_Position = projectionMatrix * mvPosition;",
+                "gl_Position = projectionMatrix * mvPosition;",
 
             "}"
 

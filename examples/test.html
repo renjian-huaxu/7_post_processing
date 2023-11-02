@@ -30,8 +30,8 @@
 
 			document.addEventListener('mousemove', onDocumentMouseMove, false);
             init();
-			// loop();
-			setInterval(loop, 1000/60);
+			loop();
+			// setInterval(loop, 1000/60);
 
             function init() {
                 container = document.createElement('div');
@@ -49,7 +49,6 @@
 				// PLANE
 
 				mesh = new MThree.Mesh( new MThree.Plane( 100, 100 ), new MThree.MeshBasicMaterial( { color: Math.random() * 0xffffff } ) );
-				mesh.position.y = -100;
 				mesh.scale.x = mesh.scale.y = mesh.scale.z = 2;
 				mesh.doubleSided = true;
 				mesh.updateMatrix();
@@ -76,28 +75,27 @@
 
 
 
-				// CUBES
+				// // CUBES
 
-				var cube = new MThree.Cube(100, 100, 100);
+				// var cube = new MThree.Cube(100, 100, 100);
 
-				mesh = new MThree.Mesh( cube, new MThree.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5 } ) );
-				mesh.position.x = 100;
-				mesh.rotation.x = Math.random();
-				mesh.rotation.y = Math.random();
-				// mesh.scale.x = mesh.scale.y = mesh.scale.z = 2;
-				mesh.updateMatrix();
-				scene.addObject(mesh);
+				// mesh = new MThree.Mesh( cube, new MThree.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5 } ) );
+				// mesh.position.x = 100;
+				// mesh.rotation.x = Math.random();
+				// mesh.rotation.y = Math.random();
+				// // mesh.scale.x = mesh.scale.y = mesh.scale.z = 2;
+				// mesh.updateMatrix();
+				// scene.addObject(mesh);
 
-				mesh = new MThree.Mesh( cube, new MThree.MeshBasicMaterial( { color: Math.random() * 0xffffff } ) );
-				mesh.position.x = 300;
-				mesh.position.y = 300;
-				mesh.rotation.x = Math.random();
-				mesh.rotation.y = Math.random();
-				// mesh.scale.x = mesh.scale.y = mesh.scale.z = 2;
-				mesh.updateMatrix();
-				scene.addObject(mesh);
+				// mesh = new MThree.Mesh( cube, new MThree.MeshBasicMaterial( { color: Math.random() * 0xffffff } ) );
+				// mesh.position.x = 300;
+				// mesh.position.y = 300;
+				// mesh.rotation.x = Math.random();
+				// mesh.rotation.y = Math.random();
+				// // mesh.scale.x = mesh.scale.y = mesh.scale.z = 2;
+				// mesh.updateMatrix();
+				// scene.addObject(mesh);
 
-				
 				
 				// // CYLINDER
 

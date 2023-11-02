@@ -472,6 +472,8 @@ export default class Geometry {
 	}
 
 	toString() {
+
 		return 'Geometry ( vertices: ' + this.vertices + ', faces: ' + this.faces + ', uvs: ' + this.uvs + ' )';
+		
 	}
 }

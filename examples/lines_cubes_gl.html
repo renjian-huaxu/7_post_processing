@@ -9,86 +9,21 @@
 				margin: 0px;
 				overflow: hidden;
 			}
-
-			a {
-				color:#0078ff;
-			}
-			
-			#info {
-				position: absolute;
-				top: 10px; width: 100%;
-				color: #ffffff;
-				padding: 5px;
-				font-family: Monospace;
-				font-size: 13px;
-				text-align: center;
-				z-index:100;
-			}
-
-			#oldie {
-				font-family:monospace;
-				font-size:13px;
-
-				text-align:center;
-				background:rgb(50,0,0);
-				color:#fff;
-				padding:1em;
-
-				width:475px;
-				margin:5em auto 0;
-
-				display:none;
-			}
-			
-			a {
-				color: orange;
-				text-decoration: none;
-			}
-
-			a:hover {
-				color: #0080ff;
-			}
 			
 		</style>
 	</head>
 	<body>
-	
-		<div id="info">
-			<a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - lines WebGL demo 
-			[<a href="http://en.wikipedia.org/wiki/Hilbert_curve">Hilbert curve</a> thanks to <a href="http://www.openprocessing.org/visuals/?visualID=15599">Thomas Diewald</a>]
-		</div>
-
-		<center>
-		<div id="oldie">
-			Sorry, your browser doesn't support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>.<br/>
-			<br/>
-			Please try in
-			<a href="http://www.chromium.org/getting-involved/dev-channel">Chrome 9+</a> /
-			<a href="http://www.mozilla.com/en-US/firefox/all-beta.html">Firefox 4+</a> /
-			<a href="http://nightly.webkit.org/">Safari OSX 10.6+</a>
-		</div>
-		</center>
-
 
 		<script type="text/javascript" src="../build/MThree.js"></script>
-		<script type="text/javascript" src="js/Stats.js"></script>
 
 		<script type="text/javascript">
 		
-			if ( !is_browser_compatible() ) {
-
-				document.getElementById( "oldie" ).style.display = "block";
-
-			}
-
 			var mouseX = 0, mouseY = 0,
 
 			windowHalfX = window.innerWidth / 2,
 			windowHalfY = window.innerHeight / 2,
 
-			camera, scene, renderer,
-
-			stats;
+			camera, scene, renderer;
 
 			init();
 			setInterval( loop, 1000 / 60 );
@@ -247,17 +182,6 @@
 				}
 
 				renderer.render(scene, camera);
-
-				//stats.update();
-			}
-
-			function is_browser_compatible() {
-
-				// WebGL support
-
-				try { var test = new Float32Array(1); } catch(e) { return false; }
-
-				return true;
 
 			}
 

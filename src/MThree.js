@@ -40,7 +40,7 @@ import { RepeatWrapping, LinearFilter, NearestFilter }  from "./materials/textur
 
 import CubeRefractionMapping from './materials/mappings/CubeRefractionMapping'
 
-import { FlatShading } from './materials/Material'
+import { FlatShading, AdditiveBlending } from './materials/Material'
 
 import RenderTarget from './materials/RenderTarget'
 import Uniforms from './materials/Uniforms'
@@ -106,6 +106,7 @@ export default {
     UVMapping,
 
     FlatShading,
+    AdditiveBlending,
 
     RenderTarget,
     Uniforms,

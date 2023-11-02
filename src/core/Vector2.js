@@ -104,6 +104,8 @@ export default class Vector2 {
   }
 
   toString() {
+
     return 'MTHREE.Vector2 (' + this.x + ', ' + this.y + ')';
+    
   }
 }

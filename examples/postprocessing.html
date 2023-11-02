@@ -47,7 +47,6 @@
 
         <div id="container"></div>
 
-        <script type="text/javascript" src="js/Stats.js"></script>
         <script type="text/javascript" src="../build/MThree.js"></script>
 		<script type="text/javascript" src="../src/extras/ShaderUtils.js"></script>
         <script type="text/javascript" src="../src/extras/ImageUtils.js"></script>
@@ -78,17 +77,21 @@
 
         <script type="text/javascript">
 
-            var container, stats;
+            var container;
 
-            var cameraOrtho, cameraPerspective, sceneModel, sceneScreen, sceneBG, renderer, mesh, directionalLight;
+            var cameraOrtho, cameraPerspective, 
+				sceneModel, sceneScreen, sceneBG, 
+				renderer, mesh, directionalLight;
 			
 			var windowHalfX = window.innerWidth / 2;
 			var windowHalfY = window.innerHeight / 2;
 			
-            var rtTexture, materialColor, materialScreen, materialFilm, materialConvolution, blurx, blury, quadBG, quadScreen;
+            var rtTexture, materialColor, materialScreen, 
+				materialFilm, materialConvolution, 
+				blurx, blury, quadBG, quadScreen;
 
             init();
-			loop()
+			// loop()
             setInterval( loop, 1000 / 60 );	
 
             function init() {
@@ -96,7 +99,13 @@
                 container = document.getElementById( 'container' );
 
                 cameraOrtho = new MThree.Camera();
-				cameraOrtho.projectionMatrix = MThree.Matrix4.makeOrtho( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, -10000, 10000 );
+				cameraOrtho.projectionMatrix = MThree.Matrix4.makeOrtho( 
+					window.innerWidth / - 2, 
+					window.innerWidth / 2, 
+					window.innerHeight / 2, 
+					window.innerHeight / - 2, 
+					-10000, 10000 );
+
                 cameraOrtho.position.z = 100;
 
 				cameraPerspective = new MThree.Camera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -113,7 +122,9 @@
 				directionalLight.position.normalize();
 				sceneModel.addLight( directionalLight );
 
-                rtTexture1 = new MThree.RenderTarget( window.innerWidth, window.innerHeight, { min_filter: MThree.LinearFilter, mag_filter: MThree.NearestFilter } );
+                rtTexture1 = new MThree.RenderTarget( window.innerWidth, window.innerHeight, 
+					{ min_filter: MThree.LinearFilter, mag_filter: MThree.NearestFilter } );
+
                 rtTexture2 = new MThree.RenderTarget( 256, 512, { min_filter: MThree.LinearFilter, mag_filter: MThree.LinearFilter } );
                 rtTexture3 = new MThree.RenderTarget( 512, 256, { min_filter: MThree.LinearFilter, mag_filter: MThree.LinearFilter } );
 
@@ -182,7 +193,9 @@
 
 				loader = new MThree.Loader( true );
 				document.body.appendChild( loader.statusDomElement );
-				loader.loadAscii( { model: "obj/leeperrysmith/LeePerrySmith.js", callback: function( geometry ) { createMesh( geometry, sceneModel, 100 ) } } );
+				loader.loadAscii( { model: "obj/leeperrysmith/LeePerrySmith.js", callback: function( geometry ) { 
+					createMesh( geometry, sceneModel, 100 ) 
+				} } );
 				
                 quadScreen = new MThree.Mesh( plane, materialConvolution );
 				quadScreen.position.z = -100;
@@ -193,11 +206,6 @@
 				renderer.autoClear = false;
                 container.appendChild( renderer.domElement );
 				
-                stats = new Stats();
-                stats.domElement.style.position = 'absolute';
-                stats.domElement.style.top = '0px';
-                //container.appendChild( stats.domElement );
-
             }
 
 			function getText( id ) {
@@ -236,7 +244,11 @@
 
 				uniforms[ "uShininess" ].value = shininess;
 
-				var parameters = { fragment_shader: shader.fragment_shader, vertex_shader: shader.vertex_shader, uniforms: uniforms };
+				var parameters = { 
+					fragment_shader: shader.fragment_shader, 
+					vertex_shader: shader.vertex_shader, 
+					uniforms: uniforms 
+				};
 				var mat2 = new MThree.MeshShaderMaterial( parameters );
 				
 				mesh = new MThree.Mesh( geometry, mat2 );
@@ -314,8 +326,6 @@
 				materialFilm.uniforms.tDiffuse.texture = rtTexture1;
 				quadScreen.materials = [ materialFilm ];
 				renderer.render( sceneScreen, cameraOrtho );
-
-                stats.update();
 
             }
 
